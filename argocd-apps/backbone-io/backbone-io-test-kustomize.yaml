@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   annotations:
     argo.octopus.com/project: "backbone-io"
-    argo.octopus.com/environment: "production"
+    argo.octopus.com/environment: "test"
 spec:
   project: default
   source:
