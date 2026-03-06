@@ -3,14 +3,10 @@ kind: Application
 metadata:
   name: backbone-io-dev-kustomize
   namespace: argocd
-  annotations:
-    argo.octopus.com/project: "backbone-io"
-    argo.octopus.com/environment: "development"
-    argo.octopus.com/instance: "demo.octopus.app"
 spec:
   project: default
   source:
-    repoURL: https://github.com/harrisonmeister/kubernetes-apps.git
+    repoURL: https://github.com/robpearson/kubernetes-apps.git
     targetRevision: HEAD
     path: kustomize/backbone-io/overlays/dev
   destination:
