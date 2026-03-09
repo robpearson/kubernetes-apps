@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   pullPolicy: IfNotPresent
-  repository: harrisonmeister/terranova-web
+  repository: robpearson/terranova-web
   tag: "2025.10.07.15"
 imagePullSecrets: []
 nameOverride: ""

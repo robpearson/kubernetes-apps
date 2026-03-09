@@ -1,3 +1,3 @@
-module github.com/harrisonmeister/kubernetes-apps/seascape-core
+module github.com/robpearson/kubernetes-apps/seascape-core
 
 go 1.15

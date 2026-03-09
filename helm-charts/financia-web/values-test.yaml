@@ -1,6 +1,6 @@
 image:
   pullPolicy: IfNotPresent
-  repository: harrisonmeister/gitops-simple-app
+  repository: robpearson/gitops-simple-app
   tag: "3.0"
 
 ingress:
@@ -9,7 +9,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: financia-web-test.harrisonmeister
+    - host: financia-web-test.robpearson
       paths: []
   tls: []
   #  - secretName: chart-example-tls

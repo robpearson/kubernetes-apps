@@ -5,15 +5,15 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/triton-key-helm-publish.yaml'
-      - 'helm-charts/triton-key/**'
+      - ".github/workflows/triton-key-helm-publish.yaml"
+      - "helm-charts/triton-key/**"
   workflow_dispatch:
 
 env:
-  DOCKER_USER: harrisonmeister
+  DOCKER_USER: robpearson
   HELM_PACKAGE_NAME: triton-key-chart
   CHART_SOURCE_DIR: ./helm-charts/triton-key
-  GHCR_OCI_REPO: harrisonmeister
+  GHCR_OCI_REPO: robpearson
 
 jobs:
   publish-chart:
@@ -43,10 +43,10 @@ jobs:
           CHART_VERSION: ${{ steps.version.outputs.tag }}
         run: |
           set -euo pipefail
-          
+
           # Export environment variable for yq's strenv() function to read
           export CHART_VERSION 
-          
+
           yq e -i -o yaml '
             .appVersion = strenv(CHART_VERSION) |
             .version = strenv(CHART_VERSION)
@@ -54,7 +54,7 @@ jobs:
 
           echo "Updated Chart.yaml contents:"
           yq e . "${{ env.CHART_SOURCE_DIR }}/Chart.yaml"
-          
+
           helm package "${{ env.CHART_SOURCE_DIR }}"
 
           PACKAGE_FILE=$(ls ${HELM_PACKAGE_NAME}-*.tgz)

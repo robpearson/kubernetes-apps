@@ -14,10 +14,10 @@ spec:
   strategy:
     canary:
       steps:
-      - setWeight: 20  # Deploy 20% of the new version's pods.
-      - pause: {}      # Wait for a manual approval before proceeding.
-      - setWeight: 60  # Deploy 60% of the new version's pods.
-      - pause: {duration: 10s} # Wait for 10 seconds before proceeding.
+        - setWeight: 20 # Deploy 20% of the new version's pods.
+        - pause: {} # Wait for a manual approval before proceeding.
+        - setWeight: 60 # Deploy 60% of the new version's pods.
+        - pause: { duration: 10s } # Wait for 10 seconds before proceeding.
   # The pod template defines the container and other pod specifications.
   template:
     metadata:
@@ -25,10 +25,10 @@ spec:
         app: luminar-app # Must match the selector above.
     spec:
       containers:
-      - name: luminar-container
-        image: harrisonmeister/gitops-simple-app
-        # This is the image pull policy.
-        imagePullPolicy: IfNotPresent
-        # The port your application exposes.
-        ports:
-        - containerPort: 8080
+        - name: luminar-container
+          image: robpearson/gitops-simple-app
+          # This is the image pull policy.
+          imagePullPolicy: IfNotPresent
+          # The port your application exposes.
+          ports:
+            - containerPort: 8080

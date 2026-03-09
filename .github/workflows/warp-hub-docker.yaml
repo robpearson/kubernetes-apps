@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/warp-hub-docker.yaml'
-      - 'apps/warp-hub/**'
+      - ".github/workflows/warp-hub-docker.yaml"
+      - "apps/warp-hub/**"
   schedule:
-    - cron: '0 3 * * 2-5' # Tuesday to Friday at 3:00 AM UTC
+    - cron: "0 3 * * 2-5" # Tuesday to Friday at 3:00 AM UTC
   workflow_dispatch:
 
 jobs:
@@ -16,12 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write 
+      packages: write
       id-token: write
       attestations: write
-    
+
     env:
-      DOCKER_USER: harrisonmeister
+      DOCKER_USER: robpearson
       IMAGE_NAME: warp-hub
       SBOM_OUTPUT_FILE: dependency-results.sbom.json
       SBOM_PACKAGE_NAME: warp-hub-sbom
@@ -73,7 +73,7 @@ jobs:
             ghcr.io/${{ env.DOCKER_USER }}/${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ env.DOCKER_USER }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.tag }}
           platforms: linux/amd64
-      
+
       - name: Run Trivy in GitHub SBOM mode
         uses: aquasecurity/trivy-action@0.32.0
         with:
@@ -82,20 +82,20 @@ jobs:
           output: ${{ env.SBOM_OUTPUT_FILE }}
           scan-ref: "."
           github-pat: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Zip SBOM Package for Octopus Deploy 🐙
         id: package
         run: |
           PACKAGE_ID="${{ env.SBOM_PACKAGE_NAME }}"
           VERSION="${{ steps.version.outputs.tag }}"
           ZIP_FILENAME="${PACKAGE_ID}.${VERSION}.zip"
-          
+
           # Create a directory to ensure the zip is structured correctly
           mkdir -p packaging
-          
+
           # Zip the SBOM file
           zip -j packaging/$ZIP_FILENAME ${{ env.SBOM_OUTPUT_FILE }}
-          
+
           echo "package_file=packaging/$ZIP_FILENAME" >> $GITHUB_OUTPUT
 
       - name: Create the Subject Checksum file for Attestation Build Provenance
@@ -107,7 +107,7 @@ jobs:
           Write-Host "The SBOM package hash is: $hashToSave"
 
           "SBOM_HASH=$hashToSave" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-              
+
       - name: Create the subject checksum file for DockerHub provenance
         shell: pwsh
         run: |
@@ -138,7 +138,7 @@ jobs:
           $cleanedSbomSha  $sbomSubject
           "@
           Write-Host "Creating the GHCR checksums file"
-          New-Item -Path . -Name "ghcr.subject.checksums.txt" -ItemType "File" -Value $subjectText    
+          New-Item -Path . -Name "ghcr.subject.checksums.txt" -ItemType "File" -Value $subjectText
 
       - name: Generate DockerHub attestation from provenance
         uses: actions/attest-build-provenance@v2
@@ -154,10 +154,10 @@ jobs:
 
       - name: Login to Octopus Deploy 🐙
         uses: OctopusDeploy/login@v1
-        with: 
+        with:
           server: ${{ env.OCTOPUS_URL }}
           service_account_id: 4d50c8ac-1515-4351-96a7-4a82d55d55ff
-      
+
       - name: Push SBOM Package to Octopus Deploy 🐙
         uses: OctopusDeploy/push-package-action@v3
         with:

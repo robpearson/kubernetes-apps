@@ -5,7 +5,7 @@
 replicaCount: 1
 image:
   pullPolicy: IfNotPresent
-  repository: harrisonmeister/triton-key
+  repository: robpearson/triton-key
   tag: "2025.10.22.1"
 imagePullSecrets: []
 nameOverride: ""

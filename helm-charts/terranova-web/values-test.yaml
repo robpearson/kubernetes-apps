@@ -4,7 +4,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: terranova-web-test.harrisonmeister
+    - host: terranova-web-test.robpearson
       paths: []
   tls: []
   #  - secretName: chart-example-tls

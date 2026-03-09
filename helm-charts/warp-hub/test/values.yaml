@@ -1,14 +1,14 @@
 replicaCount: 3
 image:
   pullPolicy: IfNotPresent
-  repository: harrisonmeister/warp-hub
+  repository: robpearson/warp-hub
   tag: "2026.01.28.53"
 
 ingress:
   enabled: false
   annotations: {}
   hosts:
-    - host: "warp-hub-prod.harrisonmeister"
+    - host: "warp-hub-prod.robpearson"
       paths: []
   tls: []
 

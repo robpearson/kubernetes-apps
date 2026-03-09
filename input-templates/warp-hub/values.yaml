@@ -1,7 +1,7 @@
 replicaCount: #{Project.WarpHub.ReplicaCount}
 image:
   pullPolicy: IfNotPresent
-  repository: harrisonmeister/warp-hub
+  repository: robpearson/warp-hub
   tag: "#{Octopus.Action.Package[warp-hub].PackageVersion}"
 
 ingress:

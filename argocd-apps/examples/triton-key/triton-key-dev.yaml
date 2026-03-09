@@ -6,27 +6,27 @@ metadata:
   annotations:
     argo.octopus.com/project: "triton-key"
     argo.octopus.com/environment: "development"
-    argo.octopus.com/instance: "demo.octopus.app"  
+    argo.octopus.com/instance: "demo.octopus.app"
 spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
     namespace: triton-key-dev
   sources:
-    - repoURL: oci://ghcr.io/harrisonmeister/triton-key-chart
+    - repoURL: oci://ghcr.io/robpearson/triton-key-chart
       targetRevision: 0.4.13
       path: .
       helm:
         valueFiles:
           - values.yaml
           - $values-source/triton-key/dev/values.yaml
-    - repoURL: https://github.com/harrisonmeister/kubernetes-helm-values.git
+    - repoURL: https://github.com/robpearson/kubernetes-helm-values.git
       targetRevision: HEAD
       ref: values-source
   syncPolicy:
     automated:
-      prune: true  
+      prune: true
       selfHeal: true
     syncOptions:
-       - Validate=false
-       - CreateNamespace=true
+      - Validate=false
+      - CreateNamespace=true

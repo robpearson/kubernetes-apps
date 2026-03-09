@@ -1,3 +1,3 @@
-module github.com/harrisonmeister/kubernetes-apps/terranova-web
+module github.com/robpearson/kubernetes-apps/terranova-web
 
 go 1.15

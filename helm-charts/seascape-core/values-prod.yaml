@@ -1,15 +1,15 @@
 image:
   pullPolicy: IfNotPresent
-  repository: harrisonmeister/seascape-core
+  repository: robpearson/seascape-core
   tag: "2026.03.04.76"
-  
+
 ingress:
   enabled: false
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: seascape-core.harrisonmeister
+    - host: seascape-core.robpearson
       paths: []
   tls: []
   #  - secretName: chart-example-tls
