@@ -5,7 +5,7 @@ metadata:
   annotations:
     argo.octopus.com/project: "stellar"
     argo.octopus.com/environment: "test"
-    argo.octopus.com/instance: "demo.octopus.app"
+    argo.octopus.com/instance: "robpearson.octopus.app"
 spec:
   project: default
   source:
